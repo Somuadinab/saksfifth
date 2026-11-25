@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saks Fifth Avenue Reward Program</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #F8F7F4;
+            --card-bg: #FFFFFF;
+            --text-primary: #000000;
+            --text-secondary: #5A5854;
+            --text-muted: #8C8881;
+            --accent-gold: #B39659;
+            --border-subtle: #EAE6DF;
+            --black-luxe: #0A0A0A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+            flex: 1;
+        }
+
+        /* Header / Brand Logo */
+        header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .brand-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            line-height: 1.1;
+        }
+
+        .brand-sub {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 8.5px;
+            font-weight: 500;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 18px auto 0;
+            width: 120px;
+        }
+
+        .divider-line {
+            height: 1px;
+            flex: 1;
+            background-color: #D5CFC4;
+        }
+
+        .divider-diamond {
+            width: 5px;
+            height: 5px;
+            background-color: var(--accent-gold);
+            transform: rotate(45deg);
+            margin: 0 10px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 38px;
+            font-weight: 400;
+            line-height: 1.12;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: #4A4844;
+        }
+
+        .hero-subtitle {
+            font-size: 12.5px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-subtitle strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Digital Reward Card */
+        .reward-card-wrapper {
+            margin: 0 auto 28px;
+            max-width: 340px;
+            perspective: 1000px;
+        }
+
+        .reward-card {
+            background: linear-gradient(135deg, #161616 0%, #050505 55%, #1A1815 100%);
+            border-radius: 14px;
+            padding: 24px 26px;
+            color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 18px 36px -10px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(179, 150, 89, 0.25);
+            aspect-ratio: 1.586 / 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Subtle luxury sheen & texture */
+        .reward-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 75% 25%, rgba(179, 150, 89, 0.14) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .reward-card::after {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border: 1px solid rgba(179, 150, 89, 0.2);
+            border-radius: 9px;
+            pointer-events: none;
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-brand {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #EAE6DF;
+        }
+
+        .card-tag {
+            font-size: 7.5px;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            text-align: right;
+            line-height: 1.3;
+        }
+
+        .card-center {
+            position: relative;
+            z-index: 1;
+            margin: 6px 0;
+        }
+
+        .card-amount {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 52px;
+            font-weight: 400;
+            line-height: 1;
+            color: #FFFFFF;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .card-amount .currency {
+            font-size: 22px;
+            margin-top: 6px;
+            margin-right: 2px;
+            color: var(--accent-gold);
+        }
+
+        .card-amount .cents {
+            font-size: 16px;
+            margin-top: 8px;
+            margin-left: 2px;
+            color: #A8A39A;
+        }
+
+        .card-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-meta {
+            font-size: 7.5px;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: #8C8881;
+        }
+
+        .card-monogram {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 18px;
+            color: var(--accent-gold);
+            opacity: 0.85;
+        }
+
+        /* Steps List */
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .step-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .step-number {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background-color: var(--black-luxe);
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-size: 13px;
+            color: #2B2A28;
+            font-weight: 400;
+        }
+
+        /* CTA Button */
+        .cta-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            background-color: var(--black-luxe);
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 11.5px;
+            font-weight: 600;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            padding: 18px 24px;
+            border-radius: 6px;
+            border: 1px solid var(--black-luxe);
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+            cursor: pointer;
+        }
+
+        .cta-btn:hover {
+            background-color: #222222;
+            border-color: var(--accent-gold);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+        }
+
+        .cta-btn .arrow {
+            font-size: 14px;
+            transition: transform 0.25s ease;
+        }
+
+        .cta-btn:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            margin-top: 44px;
+        }
+
+        .reviews-header {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .reviews-eyebrow {
+            font-size: 8.5px;
+            font-weight: 600;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .reviews-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .reviews-title em {
+            font-style: italic;
+            color: #5A5854;
+        }
+
+        .reviews-rating {
+            font-size: 11px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .stars {
+            color: var(--accent-gold);
+            letter-spacing: 2px;
+            font-size: 11px;
+        }
+
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .review-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 18px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .review-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background-color: var(--black-luxe);
+            color: #FFFFFF;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid rgba(179, 150, 89, 0.4);
+        }
+
+        .reviewer-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .reviewer-name-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .reviewer-name {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .verified-badge {
+            font-size: 10px;
+            font-weight: 500;
+            color: #2E7D5B;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .reviewer-meta {
+            font-size: 10.5px;
+            color: var(--text-muted);
+        }
+
+        .review-stars {
+            color: var(--accent-gold);
+            font-size: 11px;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+
+        .review-body {
+            font-size: 12.5px;
+            color: #3D3B38;
+            line-height: 1.55;
+        }
+
+        /* Sticky / Bottom Footer Bar */
+        footer {
+            background-color: var(--black-luxe);
+            padding: 16px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(179, 150, 89, 0.25);
+        }
+
+        .footer-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            max-width: 300px;
+            background-color: transparent;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 10.5px;
+            font-weight: 500;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            padding: 12px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 4px;
+            transition: all 0.25s ease;
+        }
+
+        .footer-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background-color: rgba(255, 255, 255, 0.04);
+        }
+
+        @media (max-width: 400px) {
+            .brand-logo {
+                font-size: 22px;
+                letter-spacing: 0.18em;
+            }
+            .hero-title {
+                font-size: 33px;
+            }
+            .card-amount {
+                font-size: 46px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+        <!-- Header -->
+        <header>
+            <div class="brand-logo">SAKS FIFTH AVENUE</div>
+            <div class="brand-sub">NEW YORK &bull; EST. 1924</div>
+            <div class="divider">
+                <span class="divider-line"></span>
+                <span class="divider-diamond"></span>
+                <span class="divider-line"></span>
+            </div>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero">
+            <h1 class="hero-title">Saks Fifth <em>Rewards</em><br>Program</h1>
+            <p class="hero-subtitle">Claim your <strong>$750 Saks Fifth Avenue</strong> reward</p>
+        </section>
+
+        <!-- Digital Reward Card -->
+        <div class="reward-card-wrapper">
+            <div class="reward-card">
+                <div class="card-top">
+                    <span class="card-brand">SAKS FIFTH AVENUE</span>
+                    <span class="card-tag">DIGITAL<br>REWARD</span>
+                </div>
+                <div class="card-center">
+                    <div class="card-amount">
+                        <span class="currency">$</span>750<span class="cents">.00</span>
+                    </div>
+                </div>
+                <div class="card-bottom">
+                    <span class="card-meta">FIFTH AVENUE &bull; SAKS.COM</span>
+                    <span class="card-monogram">SFA</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Steps -->
+        <section class="steps-list" aria-label="How to claim your reward">
+            <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-text">Click "Claim Now"</div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-text">Enter your email and basic info</div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-text">Complete 4–5 sponsored deals</div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">4</div>
+                <div class="step-text">Enjoy your $750 Saks Fifth reward</div>
+            </div>
+        </section>
+
+        <!-- Primary CTA -->
+        <a href="https://linkthem.net/?offer_id=4461&aff_id=9512" class="cta-btn">
+            <span>CLAIM NOW</span>
+            <span class="arrow">&rarr;</span>
+        </a>
+
+        <!-- Member Reviews -->
+        <section class="reviews-section">
+            <div class="reviews-header">
+                <div class="reviews-eyebrow">MEMBER REVIEWS</div>
+                <h2 class="reviews-title">What <em>Members</em> Say</h2>
+                <div class="reviews-rating">
+                    <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>4.9 &bull; 12,438 reviews</span>
+                </div>
+            </div>
+
+            <div class="reviews-list">
+                <!-- Review 1 -->
+                <article class="review-card">
+                    <div class="review-top">
+                        <div class="avatar">C</div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name-row">
+                                <span class="reviewer-name">Camille R.</span>
+                                <span class="verified-badge">&#10003; Verified</span>
+                            </div>
+                            <div class="reviewer-meta">New York, NY &bull; 2 days ago</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-body">Was eyeing the Saint Laurent cardholder and fragrances for months. Did the steps after work, card hit my email same night. Checked out on Saks.com effortlessly.</p>
+                </article>
+
+                <!-- Review 2 -->
+                <article class="review-card">
+                    <div class="review-top">
+                        <div class="avatar">S</div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name-row">
+                                <span class="reviewer-name">Sophia K.</span>
+                                <span class="verified-badge">&#10003; Verified</span>
+                            </div>
+                            <div class="reviewer-meta">Beverly Hills, CA &bull; 1 week ago</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-body">Honestly didn't believe it til the email came through. Used mine toward a pair of Manolo Blahnik heels — would definitely do it again.</p>
+                </article>
+
+                <!-- Review 3 -->
+                <article class="review-card">
+                    <div class="review-top">
+                        <div class="avatar">E</div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name-row">
+                                <span class="reviewer-name">Elena T.</span>
+                                <span class="verified-badge">&#10003; Verified</span>
+                            </div>
+                            <div class="reviewer-meta">Chicago, IL &bull; 2 weeks ago</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-body">Quick and legit. Took maybe 40 mins to finish the deals. Got the designer sunglasses and cashmere scarf I'd been saving for.</p>
+                </article>
+
+                <!-- Review 4 -->
+                <article class="review-card">
+                    <div class="review-top">
+                        <div class="avatar">V</div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name-row">
+                                <span class="reviewer-name">Victoria P.</span>
+                                <span class="verified-badge">&#10003; Verified</span>
+                            </div>
+                            <div class="reviewer-meta">Miami, FL &bull; 3 weeks ago</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-body">My friend told me about this and I thought no way. Card landed in 24h. Saks beauty haul + a new designer tote sorted.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer CTA -->
+    <footer>
+        <a href="https://linkthem.net/?offer_id=4461&aff_id=9512" class="footer-btn">
+            <span>CLAIM NOW</span>
+            <span>&rarr;</span>
+        </a>
+    </footer>
+
+</body>
+</html>
